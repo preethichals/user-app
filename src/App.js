@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Dashboard from "./Components/Dashboard";
+
+import Users from "./Components/Users";
+import Product from "./Components/Product";
+import "./css/sb-admin-2.css";
+import CreateUser from "./Components/CreateUser";
+import Login from "./Components/Login";
+import Portal from "./Components/Portal";
+import Userview from "./Components/Userview";
+import EditUser from "./Components/EditUser";
+import { UserProvider } from "./UserContext";
+import Profile from "./Components/Profile";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <UserProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/portal" element={<Portal />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="users/:id" element={<Userview />} />
+            <Route path="user/edit/:id" element={<EditUser />} />
+            <Route path="creat-user" element={<CreateUser />} />
+            <Route path="product" element={<Product />} />
+          </Route>
+          {/* <Product /> */}
+        </Routes>
+      </UserProvider>
+    </BrowserRouter>
   );
 }
 
